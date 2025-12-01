@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Alex Vo - Personal Website</title>
+
+    <style>
+        :root {
+          --bg: #0f172a;
+          --bg-light: #111827;
+          --accent: #38bdf8;
+          --accent-soft: rgba(56, 189, 248, 0.15);
+          --text-main: #e5e7eb;
+          --text-muted: #9ca3af;
+          --card-bg: #020617;
+          --border-soft: rgba(148, 163, 184, 0.3);
+          --shadow-soft: 0 18px 45px rgba(15, 23, 42, 0.9);
+          --radius-lg: 18px;
+        }
+
+        * {
+          box-sizing: border-box;
+          scroll-behavior: smooth;
+        }
+
+        body {
+          margin: 0;
+          font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+            sans-serif;
+          background: radial-gradient(circle at top, #1d283a 0, #020617 50%);
+          color: var(--text-main);
+        }
+
+        a {
+          color: inherit;
+          text-decoration: none;
+        }
+
+        /* NAVBAR */
+        .nav {
+          position: sticky;
+          top: 0;
+          z-index: 50;
+          backdrop-filter: blur(18px);
+          background: linear-gradient(
+            to bottom,
+            rgba(15, 23, 42, 0.9),
+            rgba(15, 23, 42, 0.6),
+            transparent
+          );
+          border-bottom: 1px solid rgba(148, 163, 184, 0.15);
+        }
+
+        .nav-inner {
+          max-width: 960px;
+          margin: 0 auto;
+          padding: 12px 20px;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+        }
+
+        .nav-left {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+        }
+
+        .nav-logo {
+          width: 30px;
+          height: 30px;
+          border-radius: 999px;
+          background: radial-gradient(circle at 30% 20%, #38bdf8, #0ea5e9, #0369a1);
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 18px;
+          font-weight: 700;
+          color: #e5f4ff;
+          box-shadow: 0 0 18px rgba(56, 189, 248, 0.9);
+        }
+
+        .nav-name {
+          font-weight: 600;
+          letter-spacing: 0.03em;
+          font-size: 0.95rem;
+        }
+
+        .nav-links {
+          display: flex;
+          gap: 16px;
+          font-size: 0.9rem;
+        }
+
+        .nav-links a {
+          padding: 6px 10px;
+          border-radius: 999px;
+          color: var(--text-muted);
+          border: 1px solid transparent;
+          transition: all 0.18s ease;
+        }
+
+        .nav-links a:hover {
+          color: var(--text-main);
+          border-color: rgba(148, 163, 184, 0.35);
+          background: rgba(15, 23, 42, 0.7);
+        }
+
+        /* LAYOUT */
+        .page {
+          max-width: 960px;
+          margin: 0 auto;
+          padding: 32px 20px 60px;
+        }
+
+        /* HERO */
+        .hero {
+          display: grid;
+          grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+          gap: 32px;
+          align-items: center;
+          margin-top: 30px;
+        }
+
+        @media (max-width: 800px) {
+          .hero {
+            grid-template-columns: minmax(0, 1fr);
+          }
+        }
+
+        .hero-text {
+          padding-right: 10px;
+        }
+
+        .hero-tag {
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+          padding: 4px 10px;
+          border-radius: 999px;
+          background: rgba(15, 23, 42, 0.8);
+          border: 1px solid rgba(148, 163, 184, 0.4);
+          color: var(--text-muted);
+          font-size: 0.78rem;
+          letter-spacing: 0.11em;
+          text-transform: uppercase;
+          margin-bottom: 12px;
+        }
+
+        .dot {
+          width: 7px;
+          height: 7px;
+          border-radius: 999px;
+          background: #22c55e;
+          box-shadow: 0 0 12px rgba(34, 197, 94, 0.8);
+        }
+
+        .hero-title {
+          font-size: clamp(2.1rem, 3vw + 1.5rem, 2.8rem);
+          margin: 0 0 10px;
+          letter-spacing: 0.03em;
+        }
+
+        .hero-subtitle {
+          color: var(--text-muted);
+          font-size: 0.98rem;
+          max-width: 32rem;
+          margin-bottom: 18px;
+        }
+
+        .hero-highlight {
+          color: #e5e7eb;
+        }
+
+        .hero-buttons {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 12px;
+          margin-bottom: 18px;
+        }
+
+        .btn-primary,
+        .btn-ghost {
+          border-radius: 999px;
+          padding: 9px 16px;
+          font-size: 0.9rem;
+          border: 1px solid transparent;
+          cursor: pointer;
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+          background: none;
+          color: inherit;
+          transition: all 0.18s ease;
+        }
+
+        .btn-primary {
+          background: linear-gradient(135deg, #38bdf8, #0ea5e9, #22c55e);
+          color: #0b1220;
+          font-weight: 600;
+          box-shadow: 0 12px 40px rgba(56, 189, 248, 0.55);
+        }
+
+        .btn-primary:hover {
+          transform: translateY(-1px);
+          box-shadow: 0 18px 55px rgba(56, 189, 248, 0.65);
+          filter: saturate(1.1);
+        }
+
+        .btn-ghost {
+          border-color: rgba(148, 163, 184, 0.4);
+          color: var(--text-muted);
+          background: rgba(15, 23, 42, 0.8);
+        }
+
+        .btn-ghost:hover {
+          color: var(--text-main);
+          border-color: rgba(148, 163, 184, 0.7);
+          background: rgba(15, 23, 42, 0.9);
+        }
+
+        .hero-meta {
+          font-size: 0.82rem;
+          color: var(--text-muted);
+        }
+
+        .hero-meta span {
+          opacity: 0.8;
+        }
+
+        /* PROFILE CARD */
+        .hero-card {
+          background: radial-gradient(circle at top left, #1d4ed8, #0f172a 45%);
+          border-radius: var(--radius-lg);
+          padding: 18px 18px 20px;
+          border: 1px solid rgba(148, 163, 184, 0.35);
+          box-shadow: var(--shadow-soft);
+        }
+
+        .profile-top {
+          display: flex;
+          align-items: center;
+          gap: 14px;
+          border-bottom: 1px solid rgba(148, 163, 184, 0.25);
+          padding-bottom: 14px;
+          margin-bottom: 14px;
+        }
+
+        .profile-img-wrap {
+          width: 68px;
+          height: 68px;
+          border-radius: 999px;
+          padding: 2px;
+          background: conic-gradient(
+            from 180deg,
+            #38bdf8,
+            #22c55e,
+            #a855f7,
+            #38bdf8
+          );
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+
+        .profile-img-inner {
+          width: 100%;
+          height: 100%;
+          border-radius: inherit;
+          background: radial-gradient(circle at 30% 20%, #1f2937, #020617);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 1.8rem;
+          font-weight: 600;
+          color: #e5e7eb;
+        }
+
+        .profile-info h2 {
+          margin: 0;
+          font-size: 1.05rem;
+        }
+
+        .profile-info p {
+          margin: 3px 0 0;
+          font-size: 0.85rem;
+          color: #cbd5f5;
+        }
+
+        .profile-tagline {
+          font-size: 0.8rem;
+          color: #cbd5f5;
+          opacity: 0.8;
+          margin-top: 4px;
+        }
+
+        .profile-body {
+          font-size: 0.85rem;
+          color: #e5e7eb;
+          opacity: 0.95;
+          margin-bottom: 10px;
+        }
+
+        .profile-badges {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 6px;
+          margin-bottom: 10px;
+        }
+
+        .badge {
+          font-size: 0.72rem;
+          padding: 4px 9px;
+          border-radius: 999px;
+          border: 1px solid rgba(148, 163, 184, 0.55);
+          background: rgba(15, 23, 42, 0.6);
+          color: #e5e7eb;
+          white-space: nowrap;
+        }
+
+        .profile-footer {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          font-size: 0.8rem;
+          color: #cbd5f5;
+          opacity: 0.85;
+        }
+
+        .status-dot {
+          width: 8px;
+          height: 8px;
+          border-radius: 999px;
+          background: #22c55e;
+          box-shadow: 0 0 12px rgba(34, 197, 94, 0.9);
+          margin-right: 6px;
+          display: inline-block;
+        }
+
+        /* SECTIONS */
+        section {
+          margin-top: 40px;
+        }
+
+        .section-header {
+          margin-bottom: 18px;
+        }
+
+        .section-eyebrow {
+          font-size: 0.78rem;
+          color: var(--text-muted);
+          text-transform: uppercase;
+          letter-spacing: 0.14em;
+        }
+
+        .section-title {
+          font-size: 1.2rem;
+          margin: 4px 0;
+        }
+
+        .section-subtitle {
+          font-size: 0.9rem;
+          color: var(--text-muted);
+          max-width: 32rem;
+        }
+
+        /* CARDS GRID */
+        .grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+          gap: 18px;
+        }
+
+        .card {
+          background: radial-gradient(circle at top left, #0b1120, #020617 55%);
+          border-radius: var(--radius-lg);
+          padding: 16px 16px 18px;
+          border: 1px solid var(--border-soft);
+          box-shadow: 0 14px 40px rgba(15, 23, 42, 0.85);
+        }
+
+        .card h3 {
+          font-size: 0.96rem;
+          margin: 0 0 6px;
+        }
+
+        .card p {
+          font-size: 0.84rem;
+          color: var(--text-muted);
+          margin: 0 0 10px;
+        }
+
+        .pill-row {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 6px;
+        }
+
+        .pill {
+          font-size: 0.72rem;
+          padding: 3px 9px;
+          border-radius: 999px;
+          background: var(--accent-soft);
+          color: #e0f2fe;
+          border: 1px solid rgba(56, 189, 248, 0.6);
+          white-space: nowrap;
+        }
+
+        /* CONTACT */
+        .contact-card {
+          background: rgba(15, 23, 42, 0.9);
+          border-radius: var(--radius-lg);
+          padding: 18px 16px 20px;
+          border: 1px solid var(--border-soft);
+          box-shadow: var(--shadow-soft);
+          display: grid;
+          gap: 12px;
+        }
+
+        @media (min-width: 700px) {
+          .contact-card {
+            grid-template-columns: 2fr 1.8fr;
+            align-items: center;
+          }
+        }
+
+        .contact-label {
+          font-size: 0.85rem;
+          color: var(--text-muted);
+          margin-bottom: 2px;
+        }
+
+        .contact-value {
+          font-size: 0.9rem;
+        }
+
+        .contact-links a {
+          display: inline-flex;
+          align-items: center;
+          gap: 6px;
+          font-size: 0.85rem;
+          color: var(--accent);
+          padding: 4px 0;
+        }
+
+        .contact-links a span.icon {
+          font-size: 1rem;
+        }
+
+        footer {
+          text-align: center;
+          font-size: 0.8rem;
+          color: var(--text-muted);
+          padding: 26px 0 10px;
+          opacity: 0.8;
+        }
+    </style>
+</head>
+
+<body>
+<!-- NAV -->
+<nav class="nav">
+    <div class="nav-inner">
+        <div class="nav-left">
+            <div class="nav-logo">A</div>
+            <div class="nav-name">Alex Vo</div>
+        </div>
+        <div class="nav-links">
+            <a href="#about">About</a>
+            <a href="#skills">Skills</a>
+            <a href="#projects">Projects</a>
+            <a href="#contact">Contact</a>
+        </div>
+    </div>
+</nav>
+
+<main class="page">
+    <!-- HERO -->
+    <section class="hero" id="about">
+        <div class="hero-text">
+            <div class="hero-tag">
+                <span class="dot"></span>
+                <span>Building my future, one step at a time</span>
+            </div>
+            <h1 class="hero-title">Hi, I'm <span class="hero-highlight">Alex Vo</span>.</h1>
+            <p class="hero-subtitle">
+                I’m learning new skills, exploring technology, and building my first
+                personal website. This page is a simple place to share who I am,
+                what I’m working on, and how to reach me.
+            </p>
+
+            <div class="hero-buttons">
+                <!-- TODO: When you have a resume file online, replace # with the link -->
+                <a href="#" class="btn-primary">
+                    <span>Download Resume</span>
+                    <span>⬇️</span>
+                </a>
+                <a href="#contact" class="btn-ghost">
+                    <span>Contact Me</span>
+                </a>
+            </div>
+
+            <div class="hero-meta">
+                <span> Open to learning • Curious about tech • Growing every day </span>
+            </div>
+        </div>
+
+        <!-- PROFILE CARD -->
+        <aside class="hero-card" aria-label="Profile summary">
+            <div class="profile-top">
+                <div class="profile-img-wrap">
+                    <div class="profile-img-inner">
+                        <!-- If you have a real photo later:
+                             1. Save it as profile.jpg in the same folder
+                             2. Replace this text with: <img src="profile.jpg" alt="Photo of Alex Vo" style="width:100%;height:100%;border-radius:999px;object-fit:cover;" />
+                        -->
+                        AV
+                    </div>
+                </div>
+                <div class="profile-info">
+                    <h2>Alex Vo</h2>
+                    <p>Student · Lifelong learner</p>
+                    <div class="profile-tagline">
+                        Interested in technology, problem-solving, and teamwork.
+                    </div>
+                </div>
+            </div>
+
+            <div class="profile-body">
+                I’m at the beginning of my journey, learning how to communicate
+                clearly, work well with others, and use technology in a smart way.
+                This website is one of my first projects.
+            </div>
+
+            <div class="profile-badges">
+                <div class="badge">Curious</div>
+                <div class="badge">Reliable</div>
+                <div class="badge">Team Player</div>
+                <div class="badge">Growth Mindset</div>
+            </div>
+
+            <div class="profile-footer">
+                <div><span class="status-dot"></span> Available for new opportunities</div>
+                <div>Last updated · 2025</div>
+            </div>
+        </aside>
+    </section>
+
+    <!-- SKILLS -->
+    <section id="skills">
+        <div class="section-header">
+            <div class="section-eyebrow">Skills</div>
+            <h2 class="section-title">What I'm learning and practicing</h2>
+            <p class="section-subtitle">
+                These are some of the areas I’m building experience in. I’m always
+                open to feedback, mentorship, and chances to practice these skills.
+            </p>
+        </div>
+
+        <div class="grid">
+            <div class="card">
+                <h3>Communication & Teamwork</h3>
+                <p>
+                    I enjoy working with others, listening carefully, and helping
+                    people feel supported.
+                </p>
+                <div class="pill-row">
+                    <span class="pill">Active listening</span>
+                    <span class="pill">Collaboration</span>
+                    <span class="pill">Clear writing</span>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>Problem-Solving</h3>
+                <p>
+                    I like breaking problems into smaller steps, trying different
+                    solutions, and learning from mistakes.
+                </p>
+                <div class="pill-row">
+                    <span class="pill">Curiosity</span>
+                    <span class="pill">Logical thinking</span>
+                    <span class="pill">Persistence</span>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>Technology & Tools</h3>
+                <p>
+                    I’m exploring basic web development, using computers efficiently,
+                    and getting comfortable with new tools.
+                </p>
+                <div class="pill-row">
+                    <span class="pill">Web basics</span>
+                    <span class="pill">Typing & organization</span>
+                    <span class="pill">Online learning</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="projects">
+        <div class="section-header">
+            <div class="section-eyebrow">Projects</div>
+            <h2 class="section-title">Things I'm proud of so far</h2>
+            <p class="section-subtitle">
+                These projects show what I’ve started working on. Over time, I plan
+                to add more school, personal, or community projects here.
+            </p>
+        </div>
+
+        <div class="grid">
+            <div class="card">
+                <h3>Personal Website</h3>
+                <p>
+                    This page! I learned how to create a simple website using HTML and
+                    CSS, and how to publish it online using GitHub Pages.
+                </p>
+                <div class="pill-row">
+                    <span class="pill">HTML</span>
+                    <span class="pill">CSS</span>
+                    <span class="pill">GitHub Pages</span>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>Learning Journal</h3>
+                <p>
+                    I keep notes on what I learn — school topics, technology concepts,
+                    and new ideas I want to remember.
+                </p>
+                <div class="pill-row">
+                    <span class="pill">Note-taking</span>
+                    <span class="pill">Self-reflection</span>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>Future Projects</h3>
+                <p>
+                    I’m interested in trying small coding projects, helping with tech
+                    tasks, and contributing to school or community activities.
+                </p>
+                <div class="pill-row">
+                    <span class="pill">Open to ideas</span>
+                    <span class="pill">Always learning</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact">
+        <div class="section-header">
+            <div class="section-eyebrow">Contact</div>
+            <h2 class="section-title">Let’s get in touch</h2>
+            <p class="section-subtitle">
+                If you’d like to connect, learn more about me, or share an
+                opportunity, you can reach me using the information below.
+            </p>
+        </div>
+
+        <div class="contact-card">
+            <div>
+                <div class="contact-label">Primary email</div>
+                <div class="contact-value">
+                    <a href="mailto:alexvo@example.com">alexvo@example.com</a>
+                </div>
+
+                <div style="margin-top: 10px;">
+                    <div class="contact-label">Location</div>
+                    <div class="contact-value">[Add your city/region here]</div>
+                </div>
+            </div>
+
+            <div class="contact-links">
+                <!-- When you have real links, replace # -->
+                <a href="#" aria-label="LinkedIn profile">
+                    <span class="icon">💼</span>
+                    <span>LinkedIn (add link)</span>
+                </a>
+                <a href="#" aria-label="Other profile or portfolio">
+                    <span class="icon">🌐</span>
+                    <span>Another profile (optional)</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        © 2025 Alex Vo · Personal Website
+    </footer>
+</main>
+</body>
+</html>
